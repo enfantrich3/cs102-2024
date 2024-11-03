@@ -1,3 +1,5 @@
+"""Этот модуль содержит функции для работы с текстом."""
+
 def text():
-    message = 'Hello World'
-    return message
+    """Возвращает сообщение 'message'."""
+    return "message"
