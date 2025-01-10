@@ -1,6 +1,6 @@
 "Этот модуль содержит функции для работы с текстом."
 
 
-def text(message):
+def text():
     "Возвращает сообщение 'message'."
-    return message
+    return "message"
