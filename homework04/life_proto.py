@@ -10,7 +10,9 @@ Grid = tp.List[Cells]
 
 
 class GameOfLife:
-    def __init__(self, width: int = 640, height: int = 480, cell_size: int = 10, speed: int = 10) -> None:
+    def __init__(
+        self, width: int = 640, height: int = 480, cell_size: int = 10, speed: int = 10
+    ) -> None:
         self.width = width
         self.height = height
         self.cell_size = cell_size
@@ -32,9 +34,13 @@ class GameOfLife:
     def draw_lines(self) -> None:
         """Отрисовать сетку"""
         for x in range(0, self.width, self.cell_size):
-            pygame.draw.line(self.screen, pygame.Color("black"), (x, 0), (x, self.height))
+            pygame.draw.line(
+                self.screen, pygame.Color("black"), (x, 0), (x, self.height)
+            )
         for y in range(0, self.height, self.cell_size):
-            pygame.draw.line(self.screen, pygame.Color("black"), (0, y), (self.width, y))
+            pygame.draw.line(
+                self.screen, pygame.Color("black"), (0, y), (self.width, y)
+            )
 
     def run(self) -> None:
         """Запустить игру"""
@@ -97,7 +103,10 @@ class GameOfLife:
             for col_index, col in enumerate(row):
                 color = pygame.Color("green") if col == 1 else pygame.Color("white")
                 rect = pygame.Rect(
-                    col_index * self.cell_size, row_index * self.cell_size, self.cell_size, self.cell_size
+                    col_index * self.cell_size,
+                    row_index * self.cell_size,
+                    self.cell_size,
+                    self.cell_size,
                 )
                 pygame.draw.rect(self.screen, color, rect)
 
@@ -123,7 +132,11 @@ class GameOfLife:
         neighbours = []
         for i in range(row - 1, row + 2):
             for j in range(col - 1, col + 2):
-                if 0 <= i < self.cell_height and 0 <= j < self.cell_width and (row, col) != (i, j):
+                if (
+                    0 <= i < self.cell_height
+                    and 0 <= j < self.cell_width
+                    and (row, col) != (i, j)
+                ):
                     neighbours.append(self.grid[i][j])
         return neighbours
 

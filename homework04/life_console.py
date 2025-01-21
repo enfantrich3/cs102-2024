@@ -49,4 +49,3 @@ class Console(UI):
                 running = False
                 break
         curses.endwin()
-        
