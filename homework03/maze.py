@@ -204,4 +204,3 @@ if __name__ == "__main__":
     NGRID, PATH = solve_maze(GRID)
     MAZE = add_path_to_grid(NGRID, PATH)
     print(pd.DataFrame(MAZE))
-    
