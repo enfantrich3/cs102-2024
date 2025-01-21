@@ -20,12 +20,8 @@ class GUI(UI):
 
         self.button_frame = pygame.Rect(self.width // 2 - 50, 0, 104, 54)
         self.button = pygame.Rect(self.width // 2 - 48, 2, 100, 50)
-        self.error_frame = pygame.Rect(
-            self.width // 2 - 132, self.height // 2 - 7, 304, 34
-        )
-        self.error_button = pygame.Rect(
-            self.width // 2 - 130, self.height // 2 - 5, 300, 30
-        )
+        self.error_frame = pygame.Rect(self.width // 2 - 132, self.height // 2 - 7, 304, 34)
+        self.error_button = pygame.Rect(self.width // 2 - 130, self.height // 2 - 5, 300, 30)
 
         pygame.font.init()
         self.font = pygame.font.Font(None, 30)
@@ -35,13 +31,9 @@ class GUI(UI):
     def draw_lines(self) -> None:
         """Отрисовать сетку"""
         for x in range(0, self.width, self.cell_size):
-            pygame.draw.line(
-                self.screen, pygame.Color("black"), (x, 0), (x, self.height)
-            )
+            pygame.draw.line(self.screen, pygame.Color("black"), (x, 0), (x, self.height))
         for y in range(0, self.height, self.cell_size):
-            pygame.draw.line(
-                self.screen, pygame.Color("black"), (0, y), (self.width, y)
-            )
+            pygame.draw.line(self.screen, pygame.Color("black"), (0, y), (self.width, y))
 
     def draw_grid(self) -> None:
         """Отобразить состояние клеток."""
@@ -85,25 +77,17 @@ class GUI(UI):
                         pos_x = mouse_pos[1] // self.cell_size
                         pos_y = mouse_pos[0] // self.cell_size
                         if 0 <= pos_x < self.life.rows and 0 <= pos_y < self.life.cols:
-                            self.life.curr_generation[pos_x][pos_y] = (
-                                1 - self.life.curr_generation[pos_x][pos_y]
-                            )
+                            self.life.curr_generation[pos_x][pos_y] = 1 - self.life.curr_generation[pos_x][pos_y]
 
             self.screen.fill(pygame.Color("white"))  # очистка экрана
             self.draw_grid()
             self.draw_lines()
 
             # кнопка паузы
-            button_color = (
-                pygame.Color("light steel blue")
-                if self.status
-                else (pygame.Color("lavender"))
-            )
+            button_color = pygame.Color("light steel blue") if self.status else (pygame.Color("lavender"))
             pygame.draw.rect(self.screen, "indigo", self.button_frame, border_radius=15)
             pygame.draw.rect(self.screen, button_color, self.button, border_radius=15)
-            button_text = self.font.render(
-                "Pause" if not self.status else "Resume", True, pygame.Color("indigo")
-            )
+            button_text = self.font.render("Pause" if not self.status else "Resume", True, pygame.Color("indigo"))
             if not self.status:
                 self.screen.blit(button_text, (self.button.x + 20, self.button.y + 15))
             else:
@@ -111,15 +95,9 @@ class GUI(UI):
 
             # сообщения об ошибках
             if self.life.is_max_generations_exceeded:
-                pygame.draw.rect(
-                    self.screen, "black", self.error_frame, border_radius=0
-                )
-                pygame.draw.rect(
-                    self.screen, "white", self.error_button, border_radius=0
-                )
-                error_msg = self.font.render(
-                    "Max generations exceeded", True, pygame.Color("red")
-                )
+                pygame.draw.rect(self.screen, "black", self.error_frame, border_radius=0)
+                pygame.draw.rect(self.screen, "white", self.error_button, border_radius=0)
+                error_msg = self.font.render("Max generations exceeded", True, pygame.Color("red"))
                 self.screen.blit(error_msg, (self.width // 3, self.height // 2))
                 self.status = True
             if not self.life.is_changing:
